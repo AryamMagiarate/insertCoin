@@ -1,0 +1,62 @@
+<div class="container">
+  <mat-button-toggle-group     name="option"    aria-label="LogIn / SingUp"    (change)="selectAction($event.value)"    value="signIn">
+    <mat-button-toggle value="signIn" class="text-warning border border-warning rounded-pill px-2 my-3 m-1" style="background: linear-gradient(to top right, #7c7b7bc5 0%, #1f1201d2 100%);">Ingresar</mat-button-toggle>
+    <mat-button-toggle value="signUp" class="text-warning border border-warning rounded-pill my-3 m-1" style="background: linear-gradient(to top right, #7c7b7bc5 0%, #1f1201d2 100%); text-shadow: 1px 1px 1px black;">Registrarse</mat-button-toggle>
+  </mat-button-toggle-group>
+  <mat-vertical-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="emailFormGroup">
+      <form [formGroup]="emailFormGroup" class="text-warning">
+        <ng-template matStepLabel class="text-warning">Ingrese su correo electronico</ng-template>
+        <mat-form-field class="text-warning">
+          <input matInput placeholder="Email" formControlName="emailControl" required/>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext class="text-warning">Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="passwordFormGroup" class="my-3">
+      <form [formGroup]="passwordFormGroup" class="text-warning">
+        <ng-template matStepLabel class="text-warning">Ingrese su contraseña</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Contraseña" formControlName="passwordControl" type="password" required/>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext *ngIf="!isLogin" class="text-warning">Siguiente</button>
+          <button mat-button matStepperPrevious class="text-warning">Regresar</button>
+          <button mat-raised-button color="primary" *ngIf="isLogin && passwordFormGroup.valid" (click)="login()">Ingresar</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step *ngIf="!isLogin" [stepControl]="clientFormGroup">
+      <form [formGroup]="clientFormGroup" class="form-data">
+        <ng-template matStepLabel class="text-warning">Llene el formulario con sus datos personales</ng-template>
+        <mat-form-field class="bg-transparent text-warning">
+          <input matInput placeholder="Nombre" formControlName="nombreControl" type="text" required class="bg-transparent text-warning"/>
+        </mat-form-field>
+        <mat-form-field class="bg-transparent text-warning">
+          <input matInput placeholder="Apellido" formControlName="apellidoControl" type="text" required class="bg-transparent text-warning"/>
+        </mat-form-field>
+        <mat-form-field class="bg-transparent text-warning">
+          <input matInput placeholder="Celular - Teléfono" formControlName="telefonoControl" type="number" class="bg-transparent text-warning"/>
+        </mat-form-field>
+        Domicilio:
+        <mat-form-field class="bg-transparent text-warning">
+          <input matInput placeholder="Calle" formControlName="calleControl" type="text" class="bg-transparent text-warning"/>          
+        </mat-form-field>
+        <mat-form-field class="bg-transparent text-warning">
+          <input matInput placeholder="numero" formControlName="numeroControl" type="text" class="bg-transparent text-warning"/>          
+        </mat-form-field>
+        <mat-form-field class="bg-transparent text-warning">
+          <input matInput placeholder="Localidad" formControlName="localidadControl" type="text" class="bg-transparent text-warning"/>          
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" *ngIf="clientFormGroup.valid" (click)="singUp()" class="bg-transparent text-warning"> Registrarse</button>
+          <button mat-button matStepperPrevious  class="bg-transparent text-warning">Regresar</button>
+          <button mat-button (click)="stepper.reset()" class="bg-transparent text-warning">Reiniciar formulario</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-vertical-stepper>
+  <button mat-raised-button (click)="regresar()" class="text-warning border border-warning px-4 m-3 rounded-pill" style="background: linear-gradient(to top right,#7c7b7bc5 0%, #1f1201d2 100%);">Cerrar</button>  
+</div>

@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  mat-vertical-stepper {
+    width: 100%;
+    max-width: 600px;
+  }
+  mat-form-field {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+.fondo-login{
+  background: none;
+}
